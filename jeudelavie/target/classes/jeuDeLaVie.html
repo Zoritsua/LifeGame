@@ -1,0 +1,55 @@
+<!-- FILEPATH: c:\Users\Quentin\Documents\FORMATIONS\Master\Cours\Design Patern\LifeGame\src\ressources\jeuDeLaVie.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"></html>
+<head>
+    <meta charset="UTF-8">
+    <title>Game of Life</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/js/game.js}"></script>
+</head>
+<body>
+    <h1>Game of Life</h1>
+    <table id="game-board">
+        <tbody>
+            <tr th:each="row, rowStat : ${grille}">
+                <td th:each="cell, colStat : ${row}">
+                    <div th:class="${cell ? 'cellule-vivante' : 'cellule-morte'}"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button id="start-button">Start</button>
+    <button id="stop-button">Stop</button>
+</body>
+</html>
+<script>
+    $(document).ready(function() {
+        var game = new GameOfLife();
+        game.init();
+        $('#start-button').click(function() {
+            game.start();
+        });
+        $('#stop-button').click(function() {
+            game.stop();
+        });
+    });
+
+</script>
+
+<style
+    th:inline="css">
+    .cellule-vivante {
+        background-color: black;
+        width: 10px;
+        height: 10px;
+    }
+
+    .cellule-morte {
+        background-color: white;
+        width: 10px;
+        height: 10px;
+    }
+
+</style>
